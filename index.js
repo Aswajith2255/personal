@@ -1,19 +1,28 @@
 
 // Initialize EmailJS
 (function () {
-    emailjs.init("YXjcMuMLLyu7pDIK0"); // Replace with your EmailJS public key
+    emailjs.init("YXjcMuMLLyu7pDIK0");
 })();
 
-// Handle form submit
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector(".contactleft");
+    const form = document.getElementById("contactForm");
 
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Stop page reload
+        event.preventDefault();
 
-        // Collect data
+        const emailInput = form.querySelector("input[name='Email']");
+        const email = emailInput.value.trim();
+
+        // Extra email format validation (safety check)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            alert("❌ Please enter a valid email address");
+            emailInput.focus();
+            return; // stop submission
+        }
+
         const name = form.querySelector("input[name='Name']").value;
-        const email = form.querySelector("input[name='Email']").value;
         const message = form.querySelector("textarea[name='message']").value;
 
         // Send email using EmailJS
@@ -22,12 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
             from_email: email,
             message: message,
         })
-        .then(function (response) {
+        .then(() => {
             alert("✅ Message sent successfully!");
             form.reset();
-        }, function (error) {
-            alert("❌ Failed to send message. Please try again.");
-            console.error("Error:", error);
+        })
+        .catch(error => {
+            alert("❌ Failed to send message");
+            console.error(error);
         });
     });
 });
+
+
