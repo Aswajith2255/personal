@@ -86,11 +86,29 @@
             </div>
         </div>
         <div class="contactcontainer">
-<form action="" class="contactleft">
-    <input type="text" name="Name" placeholder="yourname" class="contactform">
-     <input type="text" name="Email" placeholder="your Email" class="contactform">
-     <textarea name="message" id="" placeholder="your Message" class="contactform"></textarea>
-     <button type="Send" class="btn1">Send</button>
+    <form class="contactleft" id="contactForm">
+        <input type="text" name="Name" placeholder="Your Name" class="contactform">
+
+        <!-- Email validation handled by browser -->
+        <input
+            type="email"
+            name="Email"
+            placeholder="Your Email"
+            class="contactform"
+            required
+        >
+
+        <textarea
+            name="message"
+            placeholder="Your Message"
+            class="contactform"
+        ></textarea>
+
+        <!-- Correct button type -->
+        <button type="submit" class="btn1">Send</button>
+    </form>
+</div>
+
    
         
 </h3>
@@ -104,6 +122,5 @@
     <script src="index.js"></script>
 </body>
 </html>       
-
 
 
